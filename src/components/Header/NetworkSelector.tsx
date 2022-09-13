@@ -266,6 +266,7 @@ export default function NetworkSelector() {
   useSyncChainQuery()
 
   if (!chainId || !provider) {
+    console.log('DUPA1000', chainId, provider)
     return null
   }
 

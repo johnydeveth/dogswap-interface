@@ -217,6 +217,7 @@ function Web3StatusInner() {
   const toggleWallet = navbarFlag === NavBarVariant.Enabled ? toggleWalletDropdown : toggleWalletModal
 
   if (!chainId) {
+    console.log('DUPA111')
     return null
   } else if (error) {
     return (

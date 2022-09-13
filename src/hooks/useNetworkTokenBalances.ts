@@ -25,8 +25,8 @@ export function useNetworkTokenBalances({ address }: useNetworkTokenBalancesArgs
   useEffect(() => {
     if (address) {
       const FAKE_TOKEN_NETWORK_BALANCES = {
-        [SupportedChainId.MAINNET]: CurrencyAmount.fromRawAmount(
-          new Token(SupportedChainId.MAINNET, address, 18),
+        [SupportedChainId.SHIBCHAIN]: CurrencyAmount.fromRawAmount(
+          new Token(SupportedChainId.SHIBCHAIN, address, 18),
           1e18
         ),
       }

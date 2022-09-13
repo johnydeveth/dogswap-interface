@@ -6,7 +6,6 @@ import { RPC_URLS } from 'constants/networks'
 
 function getRpcUrls(chainId: SupportedChainId): [string] {
   switch (chainId) {
-    case SupportedChainId.MAINNET:
     case SupportedChainId.SHIBCHAIN:
       return [RPC_URLS[chainId]]
     default:

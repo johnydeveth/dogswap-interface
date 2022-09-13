@@ -11,7 +11,7 @@ import { GraphQLResponse, ObservableFromValue, RequestParameters } from 'relay-r
 import store, { AppState } from '../../state/index'
 
 const CHAIN_SUBGRAPH_URL: Record<number, string> = {
-  [SupportedChainId.MAINNET]: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
+  // [SupportedChainId.MAINNET]: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',
 }
 
 const headers = {
@@ -24,8 +24,10 @@ const headers = {
 const fetchQuery = (params: RequestParameters, variables: Variables): ObservableFromValue<GraphQLResponse> => {
   const chainId = (store.getState() as AppState).application.chainId
 
+  // const subgraphUrl =
+  //   chainId && CHAIN_SUBGRAPH_URL[chainId] ? CHAIN_SUBGRAPH_URL[chainId] : CHAIN_SUBGRAPH_URL[SupportedChainId.MAINNET]
   const subgraphUrl =
-    chainId && CHAIN_SUBGRAPH_URL[chainId] ? CHAIN_SUBGRAPH_URL[chainId] : CHAIN_SUBGRAPH_URL[SupportedChainId.MAINNET]
+    chainId && CHAIN_SUBGRAPH_URL[chainId] ? CHAIN_SUBGRAPH_URL[chainId] : 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3'
 
   const body = JSON.stringify({
     query: params.text, // GraphQL text from input

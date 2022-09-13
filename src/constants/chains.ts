@@ -2,12 +2,10 @@
  * List of all the networks supported by the Uniswap Interface
  */
 export enum SupportedChainId {
-  MAINNET = 1,
   SHIBCHAIN = 1923,
 }
 
 export const CHAIN_IDS_TO_NAMES = {
-  [SupportedChainId.MAINNET]: 'mainnet',
   [SupportedChainId.SHIBCHAIN]: 'shibchain',
 }
 
@@ -22,7 +20,7 @@ export function isSupportedChain(chainId: number | null | undefined): chainId is
   return !!chainId && !!SupportedChainId[chainId]
 }
 
-export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [SupportedChainId.MAINNET, SupportedChainId.SHIBCHAIN]
+export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [SupportedChainId.SHIBCHAIN]
 
 /**
  * Unsupported networks for V2 pool behavior.
