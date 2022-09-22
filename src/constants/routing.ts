@@ -4,28 +4,22 @@ import { Currency, Token } from '@uniswap/sdk-core'
 import { SupportedChainId } from './chains'
 import {
   AMPL,
-  CBUSDT_ETHW,
   DAI,
-  DAI_ETHW,
   ETH2X_FLI,
   FEI,
   FRAX,
   FXS,
   nativeOnChain,
-  POW_ETHW,
-  POW_GOERLI,
-  POW_MAINNET,
+  PUDDLE_SC,
   renBTC,
   rETH2,
+  SC_SC,
   sETH2,
-  SHIB_ETHW,
   SWISE,
   TRIBE,
-  USDC_ETHW,
   USDC_MAINNET,
   USDT,
   WBTC,
-  WBTC_ETHW,
   WRAPPED_NATIVE_CURRENCY,
 } from './tokens'
 
@@ -53,15 +47,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     USDT,
     WBTC,
   ],
-  [SupportedChainId.ETHW]: [
-    ...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ETHW],
-    DAI_ETHW,
-    USDC_ETHW,
-    USDC_ETHW,
-    WBTC_ETHW,
-    POW_ETHW,
-    CBUSDT_ETHW,
-  ],
+  [SupportedChainId.SHIBCHAIN]: [...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.SHIBCHAIN], SC_SC, PUDDLE_SC],
 }
 export const ADDITIONAL_BASES: { [chainId: number]: { [tokenAddress: string]: Token[] } } = {
   [SupportedChainId.MAINNET]: {
@@ -92,19 +78,13 @@ export const CUSTOM_BASES: { [chainId: number]: { [tokenAddress: string]: Token[
 export const COMMON_BASES: ChainCurrencyList = {
   [SupportedChainId.MAINNET]: [
     nativeOnChain(SupportedChainId.MAINNET),
-    POW_MAINNET,
     DAI,
     USDC_MAINNET,
     USDT,
     WBTC,
     WRAPPED_NATIVE_CURRENCY[SupportedChainId.MAINNET] as Token,
   ],
-  [SupportedChainId.ETHW]: [nativeOnChain(SupportedChainId.ETHW), POW_ETHW, CBUSDT_ETHW, SHIB_ETHW],
-  [SupportedChainId.GOERLI]: [
-    nativeOnChain(SupportedChainId.GOERLI),
-    POW_GOERLI,
-    WRAPPED_NATIVE_CURRENCY[SupportedChainId.GOERLI] as Token,
-  ],
+  [SupportedChainId.SHIBCHAIN]: [nativeOnChain(SupportedChainId.SHIBCHAIN), PUDDLE_SC, SC_SC],
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
@@ -117,7 +97,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
     USDT,
     WBTC,
   ],
-  [SupportedChainId.ETHW]: [...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ETHW], POW_ETHW],
+  [SupportedChainId.SHIBCHAIN]: [...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.SHIBCHAIN], PUDDLE_SC, SC_SC],
 }
 export const PINNED_PAIRS: { readonly [chainId: number]: [Token, Token][] } = {
   [SupportedChainId.MAINNET]: [

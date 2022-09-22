@@ -15,7 +15,7 @@ import { useTickLens } from './useContract'
 import { PoolState, usePool } from './usePools'
 
 const PRICE_FIXED_DIGITS = 8
-const CHAIN_IDS_MISSING_SUBGRAPH_DATA = [SupportedChainId.ETHW]
+const CHAIN_IDS_MISSING_SUBGRAPH_DATA = [SupportedChainId.SHIBCHAIN]
 
 // Tick with fields parsed to JSBIs, and active liquidity computed.
 export interface TickProcessed {
@@ -131,10 +131,13 @@ function useTicksFromTickLens(
     }
   }, [isError, isLoading, IsSyncing, tickData, isValid])
 
-  return useMemo(
-    () => ({ isLoading, IsSyncing, isError, isValid, tickData: tickDataLatestSynced }),
-    [isLoading, IsSyncing, isError, isValid, tickDataLatestSynced]
-  )
+  return useMemo(() => ({ isLoading, IsSyncing, isError, isValid, tickData: tickDataLatestSynced }), [
+    isLoading,
+    IsSyncing,
+    isError,
+    isValid,
+    tickDataLatestSynced,
+  ])
 }
 
 function useTicksFromSubgraph(

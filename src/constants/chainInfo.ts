@@ -45,35 +45,15 @@ export type ChainInfoMap = { readonly [chainId: number]: L1ChainInfo | L2ChainIn
 } & { readonly [chainId in SupportedL1ChainId]: L1ChainInfo }
 
 const CHAIN_INFO: ChainInfoMap = {
-  [SupportedChainId.ETHW]: {
+  [SupportedChainId.SHIBCHAIN]: {
     networkType: NetworkType.L1,
-    docs: 'https://docs.powswap.io/',
-    explorer: 'https://mainnet.ethwscan.com/',
-    infoLink: 'https://powswap.io/',
-    label: 'EthereumPoW',
+    docs: 'TODO',
+    explorer: 'https://explorer.shibchain.app/',
+    infoLink: 'TODO',
+    label: 'ShibaChain',
     logoUrl: ethereumLogoUrl,
-    nativeCurrency: { name: 'EthereumPoW', symbol: 'ETHW', decimals: 18 },
+    nativeCurrency: { name: 'Shiba', symbol: 'wSHIB', decimals: 18 },
     color: colorsDark.chain_1,
-  },
-  [SupportedChainId.MAINNET]: {
-    networkType: NetworkType.L1,
-    docs: 'https://docs.powswap.io/',
-    explorer: 'https://etherscan.io/',
-    infoLink: 'https://powswap.io/',
-    label: 'Ethereum',
-    logoUrl: ethereumLogoUrl,
-    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-    color: colorsDark.chain_1,
-  },
-  [SupportedChainId.GOERLI]: {
-    networkType: NetworkType.L1,
-    docs: 'https://docs.powswap.io/',
-    explorer: 'https://goerli.etherscan.io/',
-    infoLink: 'https://powswap.io/',
-    label: 'Görli',
-    logoUrl: ethereumLogoUrl,
-    nativeCurrency: { name: 'Görli Ether', symbol: 'görETH', decimals: 18 },
-    color: colorsDark.chain_5,
   },
 }
 
@@ -99,7 +79,7 @@ export function getChainInfo(chainId: any): any {
   return undefined
 }
 
-export const MAINNET_INFO = CHAIN_INFO[SupportedChainId.MAINNET]
+export const MAINNET_INFO = CHAIN_INFO[SupportedChainId.SHIBCHAIN]
 export function getChainInfoOrDefault(chainId: number | undefined) {
   return getChainInfo(chainId) ?? MAINNET_INFO
 }

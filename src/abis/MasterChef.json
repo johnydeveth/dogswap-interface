@@ -1,36 +1,56 @@
 {
-  "address": "0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8",
+  "address": "0xbe54255d4b1FcBA9A2D990ab507334A1AD34587F",
   "abi": [
     {
       "inputs": [
         {
-          "internalType": "contract SushiToken",
-          "name": "_sushi",
+          "internalType": "contract Puddle",
+          "name": "_token",
           "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokensPerBlock",
+          "type": "uint256"
         },
         {
           "internalType": "address",
-          "name": "_devaddr",
+          "name": "_marketingAddress",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "_sushiPerBlock",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_startBlock",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_bonusEndBlock",
+          "name": "_marketingPercent",
           "type": "uint256"
         }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "previousAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "AllocPointsUpdated",
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -88,6 +108,76 @@
         {
           "indexed": true,
           "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "previousAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "EmissionRateUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "MetaTxnsDisabled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "MetaTxnsEnabled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOperator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOperator",
+          "type": "address"
+        }
+      ],
+      "name": "OperatorTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
           "name": "previousOwner",
           "type": "address"
         },
@@ -119,6 +209,69 @@
         {
           "indexed": false,
           "internalType": "uint256",
+          "name": "amountLockedUp",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardLockedUp",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "oldAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newAddress",
+          "type": "address"
+        }
+      ],
+      "name": "SetmarketingAddress",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldPercent",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newPercent",
+          "type": "uint256"
+        }
+      ],
+      "name": "SetmarketingPercent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "pid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
           "name": "amount",
           "type": "uint256"
         }
@@ -128,7 +281,20 @@
     },
     {
       "inputs": [],
-      "name": "BONUS_MULTIPLIER",
+      "name": "MAXIMUM_DEPOSIT_FEE_RATE",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAXIMUM_HARVEST_INTERVAL",
       "outputs": [
         {
           "internalType": "uint256",
@@ -152,6 +318,16 @@
           "type": "address"
         },
         {
+          "internalType": "uint16",
+          "name": "_depositFeeBP",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_harvestInterval",
+          "type": "uint256"
+        },
+        {
           "internalType": "bool",
           "name": "_withUpdate",
           "type": "bool"
@@ -163,13 +339,24 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "bonusEndBlock",
-      "outputs": [
+      "inputs": [
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "_pid",
           "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "canHarvest",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
@@ -191,32 +378,6 @@
       "name": "deposit",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_devaddr",
-          "type": "address"
-        }
-      ],
-      "name": "dev",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "devaddr",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -253,6 +414,45 @@
           "type": "uint256"
         }
       ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "_pids",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "harvestMany",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "marketingAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "marketingPercent",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
@@ -264,24 +464,24 @@
       "type": "function"
     },
     {
-      "inputs": [
+      "inputs": [],
+      "name": "metaTxnsEnabled",
+      "outputs": [
         {
-          "internalType": "uint256",
-          "name": "_pid",
-          "type": "uint256"
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
-      "name": "migrate",
-      "outputs": [],
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "migrator",
+      "name": "operator",
       "outputs": [
         {
-          "internalType": "contract IMigratorChef",
+          "internalType": "address",
           "name": "",
           "type": "address"
         }
@@ -315,7 +515,7 @@
           "type": "address"
         }
       ],
-      "name": "pendingSushi",
+      "name": "pendingTokens",
       "outputs": [
         {
           "internalType": "uint256",
@@ -353,7 +553,22 @@
         },
         {
           "internalType": "uint256",
-          "name": "accSushiPerShare",
+          "name": "accTokensPerShare",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint16",
+          "name": "depositFeeBP",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint256",
+          "name": "harvestInterval",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalLp",
           "type": "uint256"
         }
       ],
@@ -393,6 +608,16 @@
           "type": "uint256"
         },
         {
+          "internalType": "uint16",
+          "name": "_depositFeeBP",
+          "type": "uint16"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_harvestInterval",
+          "type": "uint256"
+        },
+        {
           "internalType": "bool",
           "name": "_withUpdate",
           "type": "bool"
@@ -406,12 +631,25 @@
     {
       "inputs": [
         {
-          "internalType": "contract IMigratorChef",
-          "name": "_migrator",
+          "internalType": "address",
+          "name": "_marketingAddress",
           "type": "address"
         }
       ],
-      "name": "setMigrator",
+      "name": "setmarketingAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_newmarketingPercent",
+          "type": "uint256"
+        }
+      ],
+      "name": "setmarketingPercent",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -431,10 +669,17 @@
     },
     {
       "inputs": [],
-      "name": "sushi",
+      "name": "startFarming",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token",
       "outputs": [
         {
-          "internalType": "contract SushiToken",
+          "internalType": "contract Puddle",
           "name": "",
           "type": "address"
         }
@@ -444,7 +689,7 @@
     },
     {
       "inputs": [],
-      "name": "sushiPerBlock",
+      "name": "tokensPerBlock",
       "outputs": [
         {
           "internalType": "uint256",
@@ -469,6 +714,45 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "totalLockedUpRewards",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalTokensInPools",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOperator",
+          "type": "address"
+        }
+      ],
+      "name": "transferOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -477,6 +761,42 @@
         }
       ],
       "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_pid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_allocPoint",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_withUpdate",
+          "type": "bool"
+        }
+      ],
+      "name": "updateAllocPoint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokensPerBlock",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateEmissionRate",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -517,6 +837,16 @@
         {
           "internalType": "uint256",
           "name": "rewardDebt",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rewardLockedUp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "nextHarvestUntil",
           "type": "uint256"
         }
       ],

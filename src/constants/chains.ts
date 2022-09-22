@@ -3,15 +3,12 @@
  */
 export enum SupportedChainId {
   MAINNET = 1,
-  GOERLI = 5,
-
-  ETHW = 10001,
+  SHIBCHAIN = 1923,
 }
 
 export const CHAIN_IDS_TO_NAMES = {
   [SupportedChainId.MAINNET]: 'mainnet',
-  [SupportedChainId.GOERLI]: 'goerli',
-  [SupportedChainId.ETHW]: 'ethereum_pow',
+  [SupportedChainId.SHIBCHAIN]: 'shibchain',
 }
 
 /**
@@ -25,21 +22,21 @@ export function isSupportedChain(chainId: number | null | undefined): chainId is
   return !!chainId && !!SupportedChainId[chainId]
 }
 
-export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [SupportedChainId.MAINNET, SupportedChainId.ETHW]
+export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [SupportedChainId.MAINNET, SupportedChainId.SHIBCHAIN]
 
 /**
  * Unsupported networks for V2 pool behavior.
  */
 export const UNSUPPORTED_V2POOL_CHAIN_IDS = []
 
-export const TESTNET_CHAIN_IDS = [SupportedChainId.GOERLI] as const
+export const TESTNET_CHAIN_IDS = [] as number[]
 
 export type SupportedTestnetChainId = typeof TESTNET_CHAIN_IDS[number]
 
 /**
  * All the chain IDs that are running the Ethereum protocol.
  */
-export const L1_CHAIN_IDS = [SupportedChainId.MAINNET, SupportedChainId.GOERLI, SupportedChainId.ETHW] as const
+export const L1_CHAIN_IDS = [SupportedChainId.SHIBCHAIN] as const
 
 export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number]
 

@@ -16,6 +16,5 @@ export const MAINNET_PROVIDER = new JsonRpcProvider(
  */
 export const RPC_URLS: { [key in SupportedChainId]: string } = {
   [SupportedChainId.MAINNET]: `https://eth-mainnet.g.alchemy.com/v2/9Y9jJYjbFdiPHw-lGJ0fJy9bpUyPexPy`,
-  [SupportedChainId.ETHW]: `https://mainnet.ethereumpow.org`,
-  [SupportedChainId.GOERLI]: `https://goerli.infura.io/v3/${INFURA_KEY}`,
+  [SupportedChainId.SHIBCHAIN]: `https://rpc.shibchain.app`,
 }

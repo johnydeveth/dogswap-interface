@@ -38,10 +38,7 @@ const PERMITTABLE_TOKENS: {
     [DAI.address]: { type: PermitType.ALLOWED, name: 'Dai Stablecoin', version: '1' },
     [UNI[1].address]: { type: PermitType.AMOUNT, name: 'Uniswap' },
   },
-  10001: {},
-  5: {
-    [UNI[5].address]: { type: PermitType.AMOUNT, name: 'Uniswap' },
-  },
+  1923: {},
 }
 
 export enum UseERC20PermitState {
@@ -174,31 +171,31 @@ export function useERC20Permit(
 
         const message = allowed
           ? {
-              holder: account,
-              spender,
-              allowed,
-              nonce: nonceNumber,
-              expiry: signatureDeadline,
-            }
+            holder: account,
+            spender,
+            allowed,
+            nonce: nonceNumber,
+            expiry: signatureDeadline,
+          }
           : {
-              owner: account,
-              spender,
-              value,
-              nonce: nonceNumber,
-              deadline: signatureDeadline,
-            }
+            owner: account,
+            spender,
+            value,
+            nonce: nonceNumber,
+            deadline: signatureDeadline,
+          }
         const domain = permitInfo.version
           ? {
-              name: permitInfo.name,
-              version: permitInfo.version,
-              verifyingContract: tokenAddress,
-              chainId,
-            }
+            name: permitInfo.name,
+            version: permitInfo.version,
+            verifyingContract: tokenAddress,
+            chainId,
+          }
           : {
-              name: permitInfo.name,
-              verifyingContract: tokenAddress,
-              chainId,
-            }
+            name: permitInfo.name,
+            verifyingContract: tokenAddress,
+            chainId,
+          }
         const data = JSON.stringify({
           types: {
             EIP712Domain: permitInfo.version ? EIP712_DOMAIN_TYPE : EIP712_DOMAIN_TYPE_NO_VERSION,

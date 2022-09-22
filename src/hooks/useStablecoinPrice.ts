@@ -29,7 +29,7 @@ export default function useStablecoinPrice(currency?: Currency): Price<Currency,
       return undefined
     }
 
-    if (chainId === SupportedChainId.ETHW) return
+    if (chainId === SupportedChainId.SHIBCHAIN) return
 
     // handle usdc
     if (currency?.wrapped.equals(stablecoin)) {

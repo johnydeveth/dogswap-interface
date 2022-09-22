@@ -180,7 +180,7 @@ const BridgeLabel = ({ chainId }: { chainId: SupportedChainId }) => {
 }
 const ExplorerLabel = ({ chainId }: { chainId: SupportedChainId }) => {
   switch (chainId) {
-    case SupportedChainId.ETHW:
+    case SupportedChainId.SHIBCHAIN:
       return <Trans>Blockscout</Trans>
     default:
       return <Trans>Etherscan</Trans>
@@ -249,7 +249,7 @@ function Row({
   return rowContent
 }
 
-const NETWORK_SELECTOR_CHAINS = [SupportedChainId.ETHW]
+const NETWORK_SELECTOR_CHAINS = [SupportedChainId.SHIBCHAIN]
 
 export default function NetworkSelector() {
   const { chainId, provider } = useWeb3React()

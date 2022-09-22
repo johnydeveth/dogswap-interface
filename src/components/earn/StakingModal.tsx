@@ -60,7 +60,8 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
   )
   const parsedAmountWrapped = parsedAmount?.wrapped
 
-  let hypotheticalRewardRate: CurrencyAmount<Token> = CurrencyAmount.fromRawAmount(stakingInfo.rewardRate.currency, '0')
+  let hypotheticalRewardRate: CurrencyAmount<Token> | undefined =
+    stakingInfo.rewardRate && CurrencyAmount.fromRawAmount(stakingInfo.rewardRate.currency, '0')
   if (parsedAmountWrapped?.greaterThan('0')) {
     hypotheticalRewardRate = stakingInfo.getHypotheticalRewardRate(
       stakingInfo.stakedAmount.add(parsedAmountWrapped),
@@ -149,7 +150,7 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
             id="stake-liquidity-token"
           />
 
-          <HypotheticalRewardRate dim={!hypotheticalRewardRate.greaterThan('0')}>
+          <HypotheticalRewardRate dim={!hypotheticalRewardRate || !hypotheticalRewardRate.greaterThan('0')}>
             <div>
               <ThemedText.DeprecatedBlack fontWeight={600}>
                 <Trans>Weekly Rewards</Trans>
@@ -159,9 +160,11 @@ export default function StakingModal({ isOpen, onDismiss, stakingInfo, userLiqui
             <ThemedText.DeprecatedBlack>
               <Trans>
                 {hypotheticalRewardRate
-                  .multiply((60 * 60 * 24 * 7).toString())
-                  .toSignificant(4, { groupSeparator: ',' })}{' '}
-                POW / week
+                  ? hypotheticalRewardRate
+                      .multiply((60 * 60 * 24 * 7).toString())
+                      .toSignificant(4, { groupSeparator: ',' })
+                  : '0'}{' '}
+                PUDL / week
               </Trans>
             </ThemedText.DeprecatedBlack>
           </HypotheticalRewardRate>

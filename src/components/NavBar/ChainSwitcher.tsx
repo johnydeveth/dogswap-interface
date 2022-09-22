@@ -47,7 +47,7 @@ const ChainRow = ({
 
 const ChainDetails = ({ children }: { children: ReactNode }) => <Row>{children}</Row>
 
-const NETWORK_SELECTOR_CHAINS = [SupportedChainId.ETHW, SupportedChainId.MAINNET]
+const NETWORK_SELECTOR_CHAINS = [SupportedChainId.SHIBCHAIN]
 
 interface ChainSwitcherProps {
   leftAlign?: boolean

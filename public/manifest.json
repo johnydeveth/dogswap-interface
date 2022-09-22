@@ -2,7 +2,10 @@
   "background_color": "#fff",
   "display": "standalone",
   "homepage_url": "https://app.powswap.io",
-  "providedBy": { "name": "POW!Swap", "url": "https://powswap.io" },
+  "providedBy": {
+    "name": "PuddleSwap",
+    "url": "https://powswap.io"
+  },
   "icons": [
     {
       "src": "./images/android-chrome-192x192.png",

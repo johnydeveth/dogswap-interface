@@ -2,8 +2,7 @@ import { SupportedChainId } from '../constants/chains'
 
 const BLOCK_EXPLORER_PREFIXES: { [chainId: number]: string } = {
   [SupportedChainId.MAINNET]: 'https://etherscan.io',
-  [SupportedChainId.ETHW]: 'https://ethwscan.com',
-  [SupportedChainId.GOERLI]: 'https://goerli.etherscan.io',
+  [SupportedChainId.SHIBCHAIN]: 'https://explorer.shibchain.app',
 }
 
 export enum ExplorerDataType {

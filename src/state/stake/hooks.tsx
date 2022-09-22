@@ -20,38 +20,19 @@ import {
 import tryParseCurrencyAmount from 'lib/utils/tryParseCurrencyAmount'
 import { ReactNode, useMemo } from 'react'
 
-import {
-  BUSDC_ETHW,
-  BUSDT_ETHW,
-  CBUSDT_ETHW,
-  DAI,
-  HDRN_ETHW,
-  HEX_ETHW,
-  POW_ETHW,
-  POW_GOERLI,
-  POW_MAINNET,
-  SHIB_ETHW,
-  UNI,
-  UNI_GOERLI,
-  USDC_MAINNET,
-  USDT,
-  WBTC,
-  WRAPPED_NATIVE_CURRENCY,
-} from '../../constants/tokens'
+import { DAI, PUDDLE_SC, UNI, USDC_MAINNET, USDT, WBTC, WRAPPED_NATIVE_CURRENCY } from '../../constants/tokens'
 
 export const MASTERCHEF_ADDRESS: {
   [chainId: number]: string
 } = {
   1: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
-  10001: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
-  5: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
+  1923: '0xbe54255d4b1FcBA9A2D990ab507334A1AD34587F',
 }
 
-export const POWSWAP_DEPLOYMENTS: {
+export const PUDDLE_DEPLOYMENTS: {
   [chainId: number]: {
     masterchefAddress: string
-    sushiPerBlock: JSBI
-    powToken: Token
+    token: Token
     pools: {
       lpTokenAddress: string
       token0: Token
@@ -60,98 +41,97 @@ export const POWSWAP_DEPLOYMENTS: {
     }[]
   }
 } = {
-  1: {
-    masterchefAddress: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
-    sushiPerBlock: JSBI.multiply(JSBI.BigInt('1000000000000000000000'), JSBI.BigInt(10)),
-    powToken: POW_MAINNET,
+  1923: {
+    masterchefAddress: '0xbe54255d4b1FcBA9A2D990ab507334A1AD34587F',
+    token: PUDDLE_SC,
     pools: [],
   },
-  10001: {
-    masterchefAddress: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
-    sushiPerBlock: JSBI.multiply(JSBI.BigInt('1000000000000000000000'), JSBI.BigInt(10)),
-    powToken: POW_ETHW,
-    pools: [
-      {
-        lpTokenAddress: '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE',
-        token0: SHIB_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: false,
-      },
-      {
-        lpTokenAddress: '0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f',
-        token0: SHIB_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x766ceab865d8ce27d7adbf0cae26f48d2f5714d9',
-        token0: POW_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x55D5c232D921B9eAA6b37b5845E439aCD04b4DBa',
-        token0: HEX_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x98def63c15f03fc88852449b4973c9ded5b21ae2',
-        token0: SHIB_ETHW,
-        token1: POW_ETHW,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x0513ad3a7acdf30e346d96ae927346c44a8a76f4',
-        token0: HEX_ETHW,
-        token1: POW_ETHW,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x46d00dabb109dc1a8961c2cd7f65c1579583da3e',
-        token0: HDRN_ETHW,
-        token1: POW_ETHW,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x8ae94b2f293ce713bd63041b792cf25c90dec0f6',
-        token0: CBUSDT_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x469157b26118d4afa821af631e32192d6a8a3ca6',
-        token0: POW_ETHW,
-        token1: BUSDC_ETHW,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0xbe6c389eca5351efb667e75c5899f0dd6369f9ca',
-        token0: POW_ETHW,
-        token1: BUSDT_ETHW,
-        active: true,
-      },
-    ],
-  },
-  5: {
-    masterchefAddress: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
-    sushiPerBlock: JSBI.multiply(JSBI.BigInt('1000000000000000000000'), JSBI.BigInt(10)),
-    powToken: POW_GOERLI,
-    pools: [
-      {
-        lpTokenAddress: '0x28cee28a7C4b4022AC92685C07d2f33Ab1A0e122',
-        token0: UNI_GOERLI,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.GOERLI] as Token,
-        active: true,
-      },
-      {
-        lpTokenAddress: '0x02Cc78362D8124A17d3F884Dbd7476c4ec534Cdb',
-        token0: POW_GOERLI,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.GOERLI] as Token,
-        active: false,
-      },
-    ],
-  },
+  // 10001: {
+  //   masterchefAddress: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
+  //   sushiPerBlock: JSBI.multiply(JSBI.BigInt('1000000000000000000000'), JSBI.BigInt(10)),
+  //   powToken: POW_ETHW,
+  //   pools: [
+  //     {
+  //       lpTokenAddress: '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE',
+  //       token0: SHIB_ETHW,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
+  //       active: false,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x811beEd0119b4AfCE20D2583EB608C6F7AF1954f',
+  //       token0: SHIB_ETHW,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x766ceab865d8ce27d7adbf0cae26f48d2f5714d9',
+  //       token0: POW_ETHW,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x55D5c232D921B9eAA6b37b5845E439aCD04b4DBa',
+  //       token0: HEX_ETHW,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x98def63c15f03fc88852449b4973c9ded5b21ae2',
+  //       token0: SHIB_ETHW,
+  //       token1: POW_ETHW,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x0513ad3a7acdf30e346d96ae927346c44a8a76f4',
+  //       token0: HEX_ETHW,
+  //       token1: POW_ETHW,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x46d00dabb109dc1a8961c2cd7f65c1579583da3e',
+  //       token0: HDRN_ETHW,
+  //       token1: POW_ETHW,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x8ae94b2f293ce713bd63041b792cf25c90dec0f6',
+  //       token0: CBUSDT_ETHW,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x469157b26118d4afa821af631e32192d6a8a3ca6',
+  //       token0: POW_ETHW,
+  //       token1: BUSDC_ETHW,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0xbe6c389eca5351efb667e75c5899f0dd6369f9ca',
+  //       token0: POW_ETHW,
+  //       token1: BUSDT_ETHW,
+  //       active: true,
+  //     },
+  //   ],
+  // },
+  // 5: {
+  //   masterchefAddress: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
+  //   sushiPerBlock: JSBI.multiply(JSBI.BigInt('1000000000000000000000'), JSBI.BigInt(10)),
+  //   powToken: POW_GOERLI,
+  //   pools: [
+  //     {
+  //       lpTokenAddress: '0x28cee28a7C4b4022AC92685C07d2f33Ab1A0e122',
+  //       token0: UNI_GOERLI,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.GOERLI] as Token,
+  //       active: true,
+  //     },
+  //     {
+  //       lpTokenAddress: '0x02Cc78362D8124A17d3F884Dbd7476c4ec534Cdb',
+  //       token0: POW_GOERLI,
+  //       token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.GOERLI] as Token,
+  //       active: false,
+  //     },
+  //   ],
+  // },
 }
 
 const STAKING_REWARDS_INTERFACE = new Interface(STAKING_REWARDS_ABI)
@@ -203,10 +183,10 @@ export interface StakingInfo {
   // the total amount of token staked in the contract
   totalStakedAmount: CurrencyAmount<Token>
   // the amount of token distributed per second to all LPs, constant
-  totalRewardRate: CurrencyAmount<Token>
+  totalRewardRate: CurrencyAmount<Token> | undefined
   // the current amount of token distributed to the active account per second.
   // equivalent to percent of total supply * reward rate
-  rewardRate: CurrencyAmount<Token>
+  rewardRate: CurrencyAmount<Token> | undefined
   // when the period ends
   periodFinish: Date | undefined
   // if pool is active
@@ -215,8 +195,8 @@ export interface StakingInfo {
   getHypotheticalRewardRate: (
     stakedAmount: CurrencyAmount<Token>,
     totalStakedAmount: CurrencyAmount<Token>,
-    totalRewardRate: CurrencyAmount<Token>
-  ) => CurrencyAmount<Token>
+    totalRewardRate: CurrencyAmount<Token> | undefined
+  ) => CurrencyAmount<Token> | undefined
 }
 
 // gets the staking info from the network for the active chain id
@@ -226,9 +206,9 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
   const MASTERCHEF_CONTRACT =
     chainId && MASTERCHEF_ADDRESS[chainId] ? new Contract(MASTERCHEF_ADDRESS[chainId], MASTERCHEF_INTERFACE) : undefined
 
-  const pools = chainId && POWSWAP_DEPLOYMENTS[chainId] ? POWSWAP_DEPLOYMENTS[chainId].pools : []
+  const pools = chainId && PUDDLE_DEPLOYMENTS[chainId] ? PUDDLE_DEPLOYMENTS[chainId].pools : []
 
-  const powToken = chainId && POWSWAP_DEPLOYMENTS[chainId] ? POWSWAP_DEPLOYMENTS[chainId].powToken : null
+  const token = chainId && PUDDLE_DEPLOYMENTS[chainId] ? PUDDLE_DEPLOYMENTS[chainId].token : null
 
   const poolInfoArgs = Array.from(Array(pools.length).keys()).map((value) => [value])
   const poolInfos = useSingleContractMultipleData(MASTERCHEF_CONTRACT, 'poolInfo', poolInfoArgs)
@@ -243,17 +223,19 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
     [MASTERCHEF_CONTRACT?.address]
   )
 
-  const pendingPow = useSingleContractMultipleData(MASTERCHEF_CONTRACT, 'pendingSushi', userInfoArgs)
+  const pendingPow = useSingleContractMultipleData(MASTERCHEF_CONTRACT, 'pendingTokens', userInfoArgs)
 
   const totalAllocPoint = useSingleCallResult(MASTERCHEF_CONTRACT, 'totalAllocPoint')
+
+  const tokensPerBlock = useSingleCallResult(MASTERCHEF_CONTRACT, 'tokensPerBlock')
 
   const stakingInfo: StakingInfo[] = []
   if (pools.length === 0) return []
 
   pools.forEach((pool, index) => {
-    if (!chainId || !POWSWAP_DEPLOYMENTS[chainId]) return
+    if (!chainId || !PUDDLE_DEPLOYMENTS[chainId]) return
     if (!poolInfos[index].result || !poolBalances[index].result || !totalAllocPoint.result) return
-    if (!powToken) return
+    if (!token) return
     if (!pool.active) return
     if (pairToFilterBy && pairToFilterBy.liquidityToken.address.toLowerCase() !== pool.lpTokenAddress.toLowerCase())
       return
@@ -261,19 +243,23 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
     const allocPointFraction1000 =
       (poolInfos[index].result?.at(1).toNumber() / totalAllocPoint.result[0].toNumber()) * 1000
 
-    const totalRewardPerBlock = JSBI.divide(
-      JSBI.multiply(POWSWAP_DEPLOYMENTS[chainId].sushiPerBlock, JSBI.BigInt(Math.round(allocPointFraction1000))),
-      JSBI.BigInt(1000)
-    )
+    const totalRewardPerBlock = tokensPerBlock.result
+      ? JSBI.divide(
+          JSBI.multiply(tokensPerBlock.result[0].toNumber(), JSBI.BigInt(Math.round(allocPointFraction1000))),
+          JSBI.BigInt(1000)
+        )
+      : undefined
 
     const dummyPair = new Pair(
       CurrencyAmount.fromRawAmount(pool.token0, '0'),
       CurrencyAmount.fromRawAmount(pool.token1, '0')
     )
-    const totalRewardRate = CurrencyAmount.fromRawAmount(
-      powToken,
-      JSBI.multiply(JSBI.divide(totalRewardPerBlock, JSBI.BigInt(AVERAGE_BLOCKTIME * 10)), JSBI.BigInt(10))
-    )
+    const totalRewardRate = totalRewardPerBlock
+      ? CurrencyAmount.fromRawAmount(
+          token,
+          JSBI.multiply(JSBI.divide(totalRewardPerBlock, JSBI.BigInt(AVERAGE_BLOCKTIME * 10)), JSBI.BigInt(10))
+        )
+      : undefined
 
     const stakedAmount = CurrencyAmount.fromRawAmount(
       dummyPair.liquidityToken,
@@ -288,10 +274,13 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
     const getHypotheticalRewardRate = (
       stakedAmount: CurrencyAmount<Token>,
       totalStakedAmount: CurrencyAmount<Token>,
-      totalRewardRate: CurrencyAmount<Token>
-    ): CurrencyAmount<Token> => {
+      totalRewardRate: CurrencyAmount<Token> | undefined
+    ): CurrencyAmount<Token> | undefined => {
+      if (!totalRewardRate) {
+        return undefined
+      }
       return CurrencyAmount.fromRawAmount(
-        powToken,
+        token,
         JSBI.greaterThan(totalStakedAmount.quotient, JSBI.BigInt(0))
           ? JSBI.divide(JSBI.multiply(totalRewardRate.quotient, stakedAmount.quotient), totalStakedAmount.quotient)
           : JSBI.BigInt(0)
@@ -300,7 +289,7 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
 
     const individualRewardRate = getHypotheticalRewardRate(stakedAmount, totalStakedAmount, totalRewardRate)
 
-    const earnedAmount = CurrencyAmount.fromRawAmount(powToken, JSBI.BigInt(pendingPow[index].result?.[0] ?? 0))
+    const earnedAmount = CurrencyAmount.fromRawAmount(token, JSBI.BigInt(pendingPow[index].result?.[0] ?? 0))
 
     stakingInfo.push({
       stakingRewardAddress: MASTERCHEF_CONTRACT?.address || '',
@@ -427,8 +416,11 @@ export function useStakingInfoOld(pairToFilterBy?: Pair | null): StakingInfo[] {
         const getHypotheticalRewardRate = (
           stakedAmount: CurrencyAmount<Token>,
           totalStakedAmount: CurrencyAmount<Token>,
-          totalRewardRate: CurrencyAmount<Token>
-        ): CurrencyAmount<Token> => {
+          totalRewardRate: CurrencyAmount<Token> | undefined
+        ): CurrencyAmount<Token> | undefined => {
+          if (!totalRewardRate) {
+            return undefined
+          }
           return CurrencyAmount.fromRawAmount(
             uni,
             JSBI.greaterThan(totalStakedAmount.quotient, JSBI.BigInt(0))

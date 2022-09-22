@@ -9,7 +9,7 @@ import PoolCard from '../../components/earn/PoolCard'
 import { CardBGImage, CardNoise, CardSection, DataCard } from '../../components/earn/styled'
 import Loader from '../../components/Loader'
 import { RowBetween } from '../../components/Row'
-import { POWSWAP_DEPLOYMENTS, useStakingInfoV2 } from '../../state/stake/hooks'
+import { PUDDLE_DEPLOYMENTS, useStakingInfoV2 } from '../../state/stake/hooks'
 import { ExternalLink, ThemedText } from '../../theme'
 import { Countdown } from './Countdown'
 
@@ -60,7 +60,7 @@ export default function Earn() {
 
   // toggle copy if rewards are inactive
   const stakingRewardsExist = Boolean(
-    typeof chainId === 'number' && (POWSWAP_DEPLOYMENTS[chainId]?.pools.length ?? 0) > 0
+    typeof chainId === 'number' && (PUDDLE_DEPLOYMENTS[chainId]?.pools.length ?? 0) > 0
   )
 
   return (
@@ -116,7 +116,7 @@ export default function Earn() {
             </OutlineCard>
           ) : (
             stakingInfos?.map((stakingInfo) => {
-              if (stakingInfo.totalRewardRate.equalTo(0)) return undefined
+              if (!stakingInfo.totalRewardRate || stakingInfo.totalRewardRate.equalTo(0)) return undefined
               // need to sort by added liquidity here
               return <PoolCard key={stakingInfo.poolId} stakingInfo={stakingInfo} />
             })

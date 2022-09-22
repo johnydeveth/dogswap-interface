@@ -4,73 +4,29 @@ import invariant from 'tiny-invariant'
 import { UNI_ADDRESS } from './addresses'
 import { SupportedChainId } from './chains'
 
-export const POW_GOERLI = new Token(
-  SupportedChainId.GOERLI,
-  '0x02Cc78362D8124A17d3F884Dbd7476c4ec534Cdb',
+export const SC_SC = new Token(
+  SupportedChainId.SHIBCHAIN,
+  '0xcA11851D49DDbD9584660A8989AE3838544965A6',
   18,
   'POW',
   'Powswap'
 )
 
-export const POW_MAINNET = new Token(
-  SupportedChainId.MAINNET,
-  '0x02Cc78362D8124A17d3F884Dbd7476c4ec534Cdb',
+export const PUDDLE_SC = new Token(
+  SupportedChainId.SHIBCHAIN,
+  '0xcA11851D49DDbD9584660A8989AE3838544965A6',
   18,
-  'POW',
-  'Powswap'
-)
-
-export const POW_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0x02Cc78362D8124A17d3F884Dbd7476c4ec534Cdb',
-  18,
-  'POW',
-  'Powswap'
+  'PUDL',
+  'Puddle Token'
 )
 
 export const SHIB_ETHW = new Token(
-  SupportedChainId.ETHW,
+  SupportedChainId.SHIBCHAIN,
   '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE',
   18,
-  'SHIB',
-  'Shiba Inu'
+  'SC',
+  'SHIBACHAIN'
 )
-
-export const HEX_ETHW = new Token(SupportedChainId.ETHW, '0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39', 8, 'HEX', 'HEX')
-
-export const HDRN_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0x3819f64f282bf135d62168C1e513280dAF905e06',
-  8,
-  'HDRN',
-  'Hedron'
-)
-
-export const CBUSDT_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0x2ad7868ca212135c6119fd7ad1ce51cfc5702892',
-  6,
-  'cbUSDT',
-  'Chainge Bridged USDT'
-)
-
-export const BUSDT_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0xB6334BeDf341d111525A1Db8fBE7805dE57De957',
-  18,
-  'bUSDT',
-  'BridgeTech USDT'
-)
-
-export const BUSDC_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0xC675FDBe260e1ee93106Ee596B916952a9344f44',
-  18,
-  'bUSDC',
-  'BridgeTech USDC'
-)
-
-export const UNI_GOERLI = new Token(SupportedChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap')
 
 export const USDC_MAINNET = new Token(
   SupportedChainId.MAINNET,
@@ -79,20 +35,7 @@ export const USDC_MAINNET = new Token(
   'USDC',
   'USD//C'
 )
-export const USDC_GOERLI = new Token(
-  SupportedChainId.GOERLI,
-  '0x07865c6e87b9f70255377e024ace6630c1eaa37f',
-  6,
-  'USDC',
-  'USD//C'
-)
-export const USDC_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0x07865c6e87b9f70255377e024ace6630c1eaa37f',
-  6,
-  'USDC',
-  'USD//C'
-)
+
 export const AMPL = new Token(
   SupportedChainId.MAINNET,
   '0xD46bA6D942050d489DBd938a2C909A5d5039A161',
@@ -107,13 +50,6 @@ export const DAI = new Token(
   'DAI',
   'Dai Stablecoin'
 )
-export const DAI_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0x6B175474E89094C44Da98b954EedeAC495271d0F',
-  18,
-  'DAI',
-  'Dai Stablecoin'
-)
 export const USDT = new Token(
   SupportedChainId.MAINNET,
   '0xdAC17F958D2ee523a2206206994597C13D831ec7',
@@ -121,13 +57,7 @@ export const USDT = new Token(
   'USDT',
   'Tether USD'
 )
-export const USDT_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-  6,
-  'USDT',
-  'Tether USD'
-)
+
 export const WBTC = new Token(
   SupportedChainId.MAINNET,
   '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
@@ -135,13 +65,7 @@ export const WBTC = new Token(
   'WBTC',
   'Wrapped BTC'
 )
-export const WBTC_ETHW = new Token(
-  SupportedChainId.ETHW,
-  '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599',
-  8,
-  'WBTC',
-  'Wrapped BTC'
-)
+
 export const FEI = new Token(
   SupportedChainId.MAINNET,
   '0x956F47F50A910163D8BF957Cf5846D573E7f87CA',
@@ -208,18 +132,17 @@ export const SWISE = new Token(
 
 export const UNI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(SupportedChainId.MAINNET, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
-  [SupportedChainId.ETHW]: new Token(SupportedChainId.ETHW, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
-  [SupportedChainId.GOERLI]: new Token(SupportedChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
+  [SupportedChainId.SHIBCHAIN]: new Token(SupportedChainId.SHIBCHAIN, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
 }
 
 export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } = {
   ...(WETH9 as Record<SupportedChainId, Token>),
-  [SupportedChainId.ETHW]: new Token(
-    SupportedChainId.ETHW,
-    '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
+  [SupportedChainId.SHIBCHAIN]: new Token(
+    SupportedChainId.SHIBCHAIN,
+    '0x94d0DcA5eAE9a6987F15ce91F14154E5b0FDD82F',
     18,
-    'WETH',
-    'Wrapped Ether'
+    'WWSHIB',
+    'Wrapped WWSHIB'
   ),
 }
 
