@@ -20,8 +20,8 @@ function parseStringOrBytes32(str: string | undefined, bytes32: string | undefin
     ? str
     : // need to check for proper bytes string and valid terminator
     bytes32 && BYTES32_REGEX.test(bytes32) && arrayify(bytes32)[31] === 0
-    ? parseBytes32String(bytes32)
-    : defaultValue
+      ? parseBytes32String(bytes32)
+      : defaultValue
 }
 
 /**
@@ -97,7 +97,7 @@ export function useTokenFromMapOrNetwork(tokens: TokenMap, tokenAddress?: string
 export function useCurrencyFromMap(tokens: TokenMap, currencyId?: string | null): Currency | null | undefined {
   const nativeCurrency = useNativeCurrency()
   const { chainId } = useWeb3React()
-  const isNative = Boolean(nativeCurrency && currencyId?.toUpperCase() === 'ETH')
+  const isNative = Boolean(nativeCurrency && currencyId?.toUpperCase() === 'WSHIB')
   const shorthandMatchAddress = useMemo(() => {
     const chain = supportedChainId(chainId)
     return chain && currencyId ? TOKEN_SHORTHANDS[currencyId.toUpperCase()]?.[chain] : undefined

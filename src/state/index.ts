@@ -45,6 +45,8 @@ const store = configureStore({
   preloadedState: load({ states: PERSISTED_KEYS, disableWarnings: isTestEnv() }),
 })
 
+console.log("DUPAA", store.getState())
+
 store.dispatch(updateVersion())
 
 setupListeners(store.dispatch)

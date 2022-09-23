@@ -152,11 +152,11 @@ function WrapSummary({ info: { chainId, currencyAmountRaw, unwrapped } }: { info
         Unwrap{' '}
         <FormattedCurrencyAmount
           rawAmount={currencyAmountRaw}
-          symbol={native?.wrapped?.symbol ?? 'WETH'}
+          symbol={native?.wrapped?.symbol ?? 'WWSHIB'}
           decimals={18}
           sigFigs={6}
         />{' '}
-        to {native?.symbol ?? 'ETH'}
+        to {native?.symbol ?? 'WSHIB'}
       </Trans>
     )
   } else {
@@ -165,11 +165,11 @@ function WrapSummary({ info: { chainId, currencyAmountRaw, unwrapped } }: { info
         Wrap{' '}
         <FormattedCurrencyAmount
           rawAmount={currencyAmountRaw}
-          symbol={native?.symbol ?? 'ETH'}
+          symbol={native?.symbol ?? 'WSHIB'}
           decimals={18}
           sigFigs={6}
         />{' '}
-        to {native?.wrapped?.symbol ?? 'WETH'}
+        to {native?.wrapped?.symbol ?? 'WWSHIB'}
       </Trans>
     )
   }

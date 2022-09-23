@@ -300,7 +300,7 @@ export default function AddLiquidity() {
           navigate(`/add/v2/${newCurrencyIdB}`)
         }
       } else {
-        navigate(`/add/v2/${currencyIdA ? currencyIdA : 'ETH'}/${newCurrencyIdB}`)
+        navigate(`/add/v2/${currencyIdA ? currencyIdA : 'WSHIB'}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, navigate, currencyIdB]

@@ -36,7 +36,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency.isToken ? currency.address : currency.isNative ? 'ETH' : '',
+          currencyId: currency.isToken ? currency.address : currency.isNative ? 'WSHIB' : '',
         })
       )
     },
@@ -73,6 +73,7 @@ const BAD_RECIPIENT_ADDRESSES: { [address: string]: true } = {
   '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f': true, // v2 factory
   '0xf164fC0Ec4E93095b804a4795bBe1e041497b92a': true, // v2 router 01
   '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D': true, // v2 router 02
+  '0x90E3dd297aF73613d5C8E8E13DB7378F75D27386': true,
 }
 
 // from the current swap inputs, compute the best trade and return it.
@@ -191,7 +192,7 @@ function parseCurrencyFromURLParameter(urlParam: ParsedQs[string]): string {
     const valid = isAddress(urlParam)
     if (valid) return valid
     const upper = urlParam.toUpperCase()
-    if (upper === 'ETH') return 'ETH'
+    if (upper === 'WSHIB') return 'WSHIB'
     if (upper in TOKEN_SHORTHANDS) return upper
   }
   return ''
@@ -224,7 +225,7 @@ export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
 
   if (inputCurrency === '' && outputCurrency === '' && typedValue === '' && independentField === Field.INPUT) {
     // Defaults to having the native currency selected
-    inputCurrency = 'ETH'
+    inputCurrency = 'WSHIB'
   } else if (inputCurrency === outputCurrency) {
     // clear output if identical
     outputCurrency = ''

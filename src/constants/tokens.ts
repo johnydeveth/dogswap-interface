@@ -176,6 +176,22 @@ class MaticNativeCurrency extends NativeCurrency {
   }
 }
 
+class ShibNativeCurrency extends NativeCurrency {
+  equals(other: Currency): boolean {
+    return other.isNative && other.chainId === this.chainId
+  }
+
+  get wrapped(): Token {
+    const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
+    invariant(wrapped instanceof Token)
+    return wrapped
+  }
+
+  public constructor(chainId: number) {
+    super(chainId, 18, 'WSHIB', 'Shib')
+  }
+}
+
 export class ExtendedEther extends Ether {
   public get wrapped(): Token {
     const wrapped = WRAPPED_NATIVE_CURRENCY[this.chainId]
@@ -196,6 +212,8 @@ export function nativeOnChain(chainId: number): NativeCurrency | Token {
   let nativeCurrency: NativeCurrency | Token
   if (isMatic(chainId)) {
     nativeCurrency = new MaticNativeCurrency(chainId)
+  } else if (chainId === SupportedChainId.SHIBCHAIN) {
+    nativeCurrency = new ShibNativeCurrency(chainId)
   } else {
     nativeCurrency = ExtendedEther.onChain(chainId)
   }

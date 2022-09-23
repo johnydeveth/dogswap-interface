@@ -346,11 +346,11 @@ export default function AddLiquidity() {
       } else {
         // prevent weth + eth
         const isETHOrWETHNew =
-          currencyIdNew === 'ETH' ||
+          currencyIdNew === 'WSHIB' ||
           (chainId !== undefined && currencyIdNew === WRAPPED_NATIVE_CURRENCY[chainId]?.address)
         const isETHOrWETHOther =
           currencyIdOther !== undefined &&
-          (currencyIdOther === 'ETH' ||
+          (currencyIdOther === 'WSHIB' ||
             (chainId !== undefined && currencyIdOther === WRAPPED_NATIVE_CURRENCY[chainId]?.address))
 
         if (isETHOrWETHNew && isETHOrWETHOther) {
